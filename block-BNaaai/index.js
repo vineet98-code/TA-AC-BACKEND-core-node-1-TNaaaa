@@ -6,10 +6,11 @@ const parsedUrl = url.parse(
 );
 console.log(parsedUrl);
 
+console.log(parsedUrl.pathname, parsedUrl.query);
 
-const parsedUrl1 = url.parse(
-  "https://google.com",
-  true
-);
-console.log(parsedUrl1);
+console.log(parsedUrl.host, parsedUrl.protocol);
+
+
+
+
 
