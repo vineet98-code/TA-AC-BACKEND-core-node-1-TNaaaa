@@ -3,13 +3,13 @@ var http = require('http');
 var server = http.createServer(handleRequest);
 
 function handleRequest(req, res){
-    // console.log(req.method, req.url);
-    // res.setHeader('Content-Type', 'text/plain');
+    console.log(req.method);
     res.statusCode = 201;
-    res.writeHead(200, {'content-Type': 'text/html'});
-    res.end('Hello World');
+    res.setHeader('Content-Type', 'text/html');
+    // res.writeHead(200, {'content-Type': 'text/html'});
+    res.end('<h2>Hello Campus</h2>');
 }
 
 server.listen(4444, () => {
-    console.log('server listening on port 3000');
+    console.log('server listening on port 4444');
 })
