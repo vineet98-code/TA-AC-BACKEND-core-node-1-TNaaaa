@@ -8,10 +8,10 @@ var http = require('http');
 var server = http.createServer(handleRequest);
 
 function handleRequest(req, res){
-    req.setHeader('Content-Type', 'text/html');
-    res.end();
+    console.log(req.header);
+    res.end(req.headers['user-agent']);
 }
 
 server.listen(5555, () => {
-    console.log('server listening on port 5000');
+    console.log('server listening on port 5555');
 })
