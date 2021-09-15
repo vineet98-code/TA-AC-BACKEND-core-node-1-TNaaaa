@@ -5,7 +5,7 @@ var http = require('http');
 var server = http.createServer(handleRequest);
 
 function handleRequest(req, res){
-    res.end('hey there!');
+    console.log(req, res);
 }
 
 //  res is writable string and we write to it.

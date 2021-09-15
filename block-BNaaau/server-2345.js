@@ -8,3 +8,44 @@
 // Q. Handle 2 requests on same route with different method
 //     1. GET on '/users' route where return a simple HTML form with name and email field
 //     2. POST on '/users' route with a message 'Posted for the second time'.
+
+var http = require('http');
+
+var PORT = 2345;
+
+var fs = require('fs');
+
+var server = http.createServer(handleRequest);
+
+// First Question Answer
+
+// function handleRequest(req, res){
+//     if(req.method === 'GET' && req.url === '/'){
+//        res.setHeader('Content-Type', 'text/plain');
+//        res.end(`Vineet`);
+//     }
+//     else if(req.method === 'GET' && req.url === '/about'){
+//        res.setHeader('Content-Type', 'text/plain');
+//        res.end(`<h2>Vineet</h2>`);
+//     } else {
+//         res.statusCode = 404;
+//         res.end('page not found');
+//     }
+// }
+
+// Second Question Answer
+
+function handleRequest(req, res){
+        if(req.method === 'GET' && req.url === '/users'){
+            res.setHeader('Content-Type', 'text/plain');
+           fs.createReadStream('./form.html').pipe(res);
+        }
+        else if(req.method === 'POST' && req.url === '/users'){
+            res.end('Posted for the second time');
+        }
+        
+    }
+
+server.listen(PORT, () => {
+    console.log('server listening on port PORT');
+})
