@@ -1,25 +1,40 @@
 var http = require('http');
+var fs = require('fs');
+
 
 var server = http.createServer(handleRequest);
 
-function handleRequest(req, res){
-    console.log(req.method, req.url);
-    if(req.method === 'GET' && req.url === '/'){
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Welcome to homepage');
-    } else if(req.method === 'GET' && req.url === '/about'){
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('<h2>this is all about NodeJs</h2>');
-    } else if(req.method === 'POST' && req.url === '/about'){
-        res.setHeader('Content-Type', 'application/json');
-        res.end('{message: this is a post request}');
+//  res is writable string and we write to it.
+//  req is for resd the file
 
+function handleRequest(req, res){
+
+    if(req.method === 'GET' && req.url === '/file'){
+        fs.readFile('./index.html', (err, content) => {
+            if(err) console.log(err);
+            res.setHeader('Content-Type', 'text/html');
+            res.end(content);
+        })
+ 
+    } 
+    if(req.method === 'GET' && req.url === '/stream'){
+        res.setHeader('Content-Type', 'text/html');
+        // Following two Read File method are to read the content from req  object
+        fs.createReadStream('./index.html').pipe(res); // pipe mainly push into next file
+
+            //             or
+
+        // fs.readFile('./index.html', (err, content) => {
+        //     if(err) console.log(err);
+        //     console.log(content);
+        //     res.end(content);
+        // })
     }
 
     // res.setHeader('Content-Type', 'text/html');    or  write this
     // res.writeHead(200, {'content-Type': 'text/html'});
 }
 
-server.listen(5000, () => {
-    console.log('server listening on port 5000');
+server.listen(5555, () => {
+    console.log('server listening on port 5555');
 })
